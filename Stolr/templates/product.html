@@ -1,0 +1,23 @@
+{% extends "_layout.html" %}
+{% block title %}{{ chair.name }}{% endblock %}
+
+{% block content %}
+<div class="container my-5 bg-white shadow-sm p-4 rounded-3">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ chair.image }}" class="img-fluid rounded-0 shadow-sm border border-secondary" alt="{{ chair.name }}">
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center">
+            <h2 class="mb-3 text-dark text-uppercase fw-light">{{ chair.name }}</h2>
+            <p class="mb-4 text-muted fs-5 fw-light">{{ chair.description }}</p>
+            <h4 class="mb-4 text-dark fw-bold fs-3">${{ chair.price }}</h4>
+            <a href="{{ url_for('add_item', id=chair.id) }}" class="btn btn-dark btn-lg fw-bold text-uppercase rounded-0 shadow-sm mb-3">
+                Add to Cart
+            </a>
+            <a href="{{ url_for('index') }}" class="btn btn-link text-dark text-uppercase fw-bold text-decoration-none p-0 align-self-start">
+                Back to Shop
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

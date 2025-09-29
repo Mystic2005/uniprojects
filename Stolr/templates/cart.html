@@ -1,0 +1,49 @@
+{% extends "_layout.html" %}
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+<div class="container my-4 bg-white shadow-sm p-4 rounded-3">
+    <h2 class="mb-4 text-center text-dark fw-light border-bottom pb-2">Your Cart</h2>
+    {% if cart %}
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <ul class="list-group list-group-flush border-0">
+                    {% for item in cart.values() %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3 border-top-0 border-end-0 border-start-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h5 class="mb-1 text-uppercase text-dark">{{ item.name }}</h5>
+                                <p class="text-secondary mb-0 fw-light">{{ item.description }}</p>
+                                <span class="fw-bold text-dark fs-5">${{ item.price }}</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <form method="POST" action="{{ url_for('update_quantity', id=item.id) }}" class="d-flex align-items-center me-3">
+                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control form-control-sm text-center border-secondary" style="width: 70px;">
+                                <button type="submit" class="btn btn-sm btn-link text-dark p-0 ms-2" title="Update quantity">
+                                    <i class="bi bi-arrow-clockwise fs-5"></i>
+                                </button>
+                            </form>
+                            <a href="{{ url_for('remove_item', id=item.id) }}" class="btn btn-sm btn-link text-danger p-0 ms-3" title="Remove item">
+                                <i class="bi bi-trash fs-5"></i>
+                            </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end align-items-center mt-4 pt-3 border-top border-secondary">
+            <h4 class="me-3 mb-0 fw-normal text-dark text-uppercase">Total: <span class="fw-bold text-dark fs-4">${{ total }}</span></h4>
+            <a href="{{ url_for('checkout') }}" class="btn btn-dark btn-lg fw-bold text-uppercase rounded-0 shadow-sm">Checkout <i class="bi bi-arrow-right ms-2"></i></a>
+        </div> 
+    {% else %}
+        <div class="d-flex flex-column align-items-center text-center p-5">
+            <p class="mb-4 text-muted fs-5 fw-light">Your cart is currently empty.</p>
+            <a href="{{ url_for('index') }}" class="btn btn-outline-dark btn-lg fw-bold text-uppercase rounded-0">
+                Return to Shop <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

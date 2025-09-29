@@ -1,0 +1,15 @@
+{% extends "_layout.html" %}
+{% block title %}Order Completed{% endblock %}
+
+{% block content %}
+<div class="container my-5 bg-white shadow-sm p-4 rounded-3 text-center">
+    <h2 class="mb-4 text-dark fw-light border-bottom pb-2">Order Completed</h2>
+    <div class="alert alert-success border-0 rounded-0 text-dark p-4 mb-4">
+        <h4 class="alert-heading text-uppercase fw-bold mb-3">Thank you for your order, {{ order.full_name }}!</h4>
+        <p class="mb-2 fs-5">We've sent details at: <span class="fw-bold">{{ order.email }}</span>.</p>
+        <hr class="border-secondary my-3">
+        <p class="mb-0 fs-5">Payment method: <span class="fw-bold text-dark text-uppercase">{{ order.payment_method }}</span></p>
+    </div>
+    <a href="{{ url_for('index') }}" class="btn btn-dark btn-lg fw-bold text-uppercase rounded-0 shadow-sm mt-3">Back to Home</a>
+</div>
+{% endblock %}
